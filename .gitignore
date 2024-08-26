@@ -31,10 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/application.properties
 /.mvn/wrapper/maven-wrapper.properties
 /mvnw
 /mvnw.cmd
-/pom.xml
-/src/main/java/br/com/alurafood/promotion/PromotionApplication.java
-/src/test/java/br/com/alurafood/promotion/PromotionApplicationTests.java
