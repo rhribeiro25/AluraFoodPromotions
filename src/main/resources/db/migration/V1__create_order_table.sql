@@ -2,8 +2,7 @@ CREATE TABLE IF NOT EXISTS promotions (
   id bigint GENERATED ALWAYS AS identity
   	CONSTRAINT pk_order
   		primary key,
-  		name varchar(127) NOT NULL
-  name varchar(255) NOT null
+  name varchar(127) NOT NULL,
   product_id bigint NOT NULL,
   discount_percentage bigint NOT NULL,
   start_date date NOT NULL,
