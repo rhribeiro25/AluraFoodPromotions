@@ -1,6 +1,7 @@
 package br.com.alurafood.promotions.service;
 
 import br.com.alurafood.promotions.dto.PromotionDto;
+import br.com.alurafood.promotions.kafka.PromotionKafkaTemplate;
 import br.com.alurafood.promotions.model.Promotion;
 import br.com.alurafood.promotions.model.PromotionStatus;
 import br.com.alurafood.promotions.repository.PromotionRepository;
@@ -17,6 +18,9 @@ public class PromotionService {
 
     @Autowired
     private PromotionRepository promotionRepository;
+
+    @Autowired
+    private PromotionKafkaTemplate promotionKafkaTemplate;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -38,7 +42,9 @@ public class PromotionService {
         Promotion promotion = modelMapper.map(dto, Promotion.class);
         promotion.setStatus(PromotionStatus.VALID);
         Promotion promotionSave = promotionRepository.save(promotion);
-        return modelMapper.map(promotionSave, PromotionDto.class);
+        PromotionDto promotionSaved =modelMapper.map(promotionSave, PromotionDto.class);
+        promotionKafkaTemplate.createdPromotionToProduct(promotionSaved);
+        return promotionSaved;
     }
 
     public PromotionDto update(PromotionDto promotionDto, Long id) {

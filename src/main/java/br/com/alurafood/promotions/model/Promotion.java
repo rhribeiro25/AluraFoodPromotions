@@ -31,7 +31,6 @@ public class Promotion {
     @Size(max = 124)
     private String name;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     private PromotionStatus status;
 

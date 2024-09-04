@@ -11,8 +11,8 @@ public class PromotionKafkaTemplate {
 
     private final KafkaTemplate<String, PromotionDto>  kafkaTemplate;
 
-    public PromotionDto salvarPix(PromotionDto promotionDto) {
-        kafkaTemplate.send("promotion-to-order-topic-2", promotionDto);
+    public PromotionDto createdPromotionToProduct(PromotionDto promotionDto) {
+        kafkaTemplate.send("created-promotion-to-product-topic", promotionDto);
         return promotionDto;
     }
 
