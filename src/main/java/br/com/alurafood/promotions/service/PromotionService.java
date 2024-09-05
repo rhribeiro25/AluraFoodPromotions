@@ -43,7 +43,7 @@ public class PromotionService {
         promotion.setStatus(PromotionStatus.VALID);
         Promotion promotionSave = promotionRepository.save(promotion);
         PromotionDto promotionSaved =modelMapper.map(promotionSave, PromotionDto.class);
-        promotionKafkaTemplate.createdPromotionToProduct(promotionSaved);
+        promotionKafkaTemplate.sendPromotionToProduct(promotionSaved);
         return promotionSaved;
     }
 
