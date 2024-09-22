@@ -38,20 +38,22 @@ public class PromotionService {
         return modelMapper.map(promotion, PromotionDto.class);
     }
 
-    public PromotionDto create(PromotionDto dto) {
+    public PromotionDto create(PromotionDto dto, List<PromotionValidation> validations) {
         Promotion promotion = modelMapper.map(dto, Promotion.class);
         promotion.setStatus(PromotionStatus.VALID);
+        validations.forEach(v -> v.validate(promotion));
         Promotion promotionSave = promotionRepository.save(promotion);
-        PromotionDto promotionSaved =modelMapper.map(promotionSave, PromotionDto.class);
+        PromotionDto promotionSaved = modelMapper.map(promotionSave, PromotionDto.class);
         promotionKafkaTemplate.sendPromotionToProduct(promotionSaved);
         return promotionSaved;
     }
 
-    public PromotionDto update(PromotionDto promotionDto, Long id) {
+    public PromotionDto update(PromotionDto promotionDto, Long id, List<PromotionValidation> validations) {
         if (promotionRepository.findPromotionById(id) == null) {
             throw new EntityNotFoundException();
         }
         Promotion promotion = modelMapper.map(promotionDto, Promotion.class);
+        validations.forEach(v -> v.validate(promotion));
         promotion.setId(id);
         promotionRepository.save(promotion);
         return modelMapper.map(promotion, PromotionDto.class);
