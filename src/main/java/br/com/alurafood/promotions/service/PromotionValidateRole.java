@@ -8,7 +8,7 @@ public class PromotionValidateRole implements PromotionValidation {
     
     @Override
     public void validate(PromotionImmediate promotionImmediate) {
-        if(promotionImmediate.getStatus().equals(PromotionStatus.CANCELED)){
+        if(promotionImmediate.getPromotionData().getStatus().equals(PromotionStatus.CANCELED)){
             throw new PromotionValidationException("Canceled promotion");
         }
         //else ...

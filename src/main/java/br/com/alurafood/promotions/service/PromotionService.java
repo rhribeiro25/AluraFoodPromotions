@@ -40,7 +40,7 @@ public class PromotionService {
 
     public PromotionDto create(PromotionDto dto, List<PromotionValidation> validations) {
         PromotionImmediate promotionImmediate = modelMapper.map(dto, PromotionImmediate.class);
-        promotionImmediate.setStatus(PromotionStatus.VALID);
+        promotionImmediate.getPromotionData().setStatus(PromotionStatus.VALID);
         validations.forEach(v -> v.validate(promotionImmediate));
         PromotionImmediate promotionImmediateSave = promotionRepository.save(promotionImmediate);
         PromotionDto promotionSaved = modelMapper.map(promotionImmediateSave, PromotionDto.class);
