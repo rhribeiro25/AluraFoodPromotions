@@ -1,9 +1,9 @@
 package br.com.alurafood.promotions.service;
 
-import br.com.alurafood.promotions.model.Promotion;
+import br.com.alurafood.promotions.model.PromotionImmediate;
 
 public interface PromotionValidation {
 
-    void validate(Promotion promotion);
+    void validate(PromotionImmediate promotionImmediate);
 
 }
