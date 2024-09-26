@@ -40,7 +40,7 @@ public class PromotionController {
 
         @PutMapping("/{id}")
         public ResponseEntity<PromotionDto> edit(@RequestBody @Valid PromotionDto dto, @PathVariable @NotNull Long id){
-            List<PromotionValidation> validations = Arrays.asList(new PromotionValidateRole(), new PromotionValidateTime());
+            List<PromotionValidation> validations = List.of(new PromotionValidateRole(), new PromotionValidateTime());
             return ResponseEntity.ok(promotionService.update(dto, id, validations));
         }
 }
